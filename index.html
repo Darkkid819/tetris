@@ -12,8 +12,20 @@
         <div id="score">Score: 0</div>
         <button id="startButton">Start Game</button>
     </div>
+    <div id="block-container">
+        <canvas id="nextBlock" width="120" height="120"></canvas>
+        <div>Next Block</div>
+    </div>
 
-    <script src="./js/game.js"></script>
-    <script src="./js/main.js"></script>
+    <script type="module">
+        import { startGame } from './js/tetris.js';
+      
+        document.addEventListener("DOMContentLoaded", function() {
+            console.log("Tetris loaded!");
+    
+            const startButton = document.getElementById('startButton');
+            startButton.addEventListener('click', startGame);
+        });
+      </script>
 </body>
 </html>
