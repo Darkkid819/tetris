@@ -65,7 +65,6 @@ let position = resetPosition();
 let score = 0;
 let linesClearedCount = 0;
 let currentLevel = 1;
-let gameOver = false;
 let gameStarted = false;
 let isClearing = false;
 let dropInterval;
@@ -172,7 +171,6 @@ function collision() {
 function isGameOver() {
     for (let x = 0; x < COLUMNS; x++) {
         if (board[0][x] !== 0) {
-            gameOver = true;
             return true;
         }
     }
@@ -180,7 +178,7 @@ function isGameOver() {
 }
 
 function dropTetromino() {
-    if (gameOver || isClearing) {
+    if (isGameOver() || isClearing) {
         return;
     }
 
@@ -288,7 +286,6 @@ function clearLines() {
                 nextTetromino = getRandomTetromino();
                 position = resetPosition();
                 if (collision()) {
-                    gameOver = true;
                     gameStarted = false;
                     endGame();
                 } else {
