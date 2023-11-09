@@ -3,48 +3,57 @@ body {
     background-color: #282c34;
     color: #ffffff;
     display: flex;
-    justify-content: center;
+    flex-direction: column; /* Adjust the layout to column */
     align-items: center;
     height: 100vh;
     overflow: hidden;
+    margin: 0;
+    padding: 0;
 }
 
-#main-container {
+#tetris-layout {
     display: flex;
-    justify-content: center;
-    gap: 40px; 
+    align-items: flex-start;
+    padding: 20px;
 }
 
-#game-container {
+#tetris {
+    background: #000; 
+    border: 4px solid #ffffff; 
+}
+
+#sidebar {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
+    margin-left: 40px; 
 }
 
-canvas#tetris {
-    border: 4px solid #ffffff;
-}
-
-#block-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-#block-container canvas {
+#score-container, #level-lines-container, #next-block-container {
+    background: #000; 
     border: 2px solid #ffffff; 
-}
-
-#block-container div {
-    color: #ffffff;
+    padding: 10px;
+    width: 120px;
     text-align: center;
-    font-size: 16px;
 }
 
-#score {
+.label {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+#score, #level, #lines {
     font-size: 20px;
+    font-weight: bold;
+}
+
+#next-block-container {
+    margin-top: 20px;
+}
+
+canvas#nextBlock {
+    border: 2px solid #ffffff; 
 }
 
 #startButton {
@@ -56,8 +65,36 @@ canvas#tetris {
     border-radius: 4px;
     color: #fff;
     transition: background-color 0.3s;
+    margin-top: 20px;
 }
 
 #startButton:hover {
     background-color: #0056b3;
+}
+
+#header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    color: #fff;
+    width: 100%; 
+}
+
+#tetris-logo {
+    margin-left: 50px;
+    max-width: 100px; 
+}
+
+#controls-guide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 18px;
+    flex-grow: 1; 
+    justify-content: center; 
+}
+
+#controls-guide span {
+    margin: 5px;
 }
