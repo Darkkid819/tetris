@@ -3,6 +3,23 @@ const context = canvas.getContext('2d');
 const nextBlockCanvas = document.getElementById('nextBlock');
 const nextBlockContext = nextBlockCanvas.getContext('2d');
 const scoreElement = document.getElementById('score');
+const tetrisLineClear = document.getElementById('4-line-clear');
+const gameOverJingle = document.getElementById('game-over-jingle');
+const gameOver = document.getElementById('game-over');
+const levelUp = document.getElementById('level-up');
+const lineClear = document.getElementById('line-clear');
+const movePiece = document.getElementById('move-piece');
+const music = document.getElementById('music');
+const pieceLandingLineClear = document.getElementById('piece-landing-line-clear');
+const pieceLanding = document.getElementById('piece-landing');
+const rotatePiece = document.getElementById('rotate-piece');
+
+gameOverJingle.addEventListener('ended' ,function() {
+    gameOver.play()
+});
+gameOver.addEventListener('ended' ,function() {
+    endGame()
+});
 
 const ROWS = 20;
 const COLUMNS = 10;
@@ -206,6 +223,8 @@ function moveTetromino(dir) {
     position.x += dir;
     if (collision()) {
         position.x -= dir;
+    } else {
+        movePiece.play();
     }
 }
 
@@ -216,10 +235,17 @@ function rotateTetromino() {
     );
     if (collision()) {
         currentTetromino.shape = originalShape; 
+    } else {
+        rotatePiece.play();
     }
 }
 
 function flashLines(linesToClear, callback) {
+    if (linesToClear == 4) {
+        tetrisLineClear.play();
+    } else {
+        lineClear.play();
+    }
     let flashCount = 0;
     isClearing = true;
     let flashInterval = setInterval(() => {
@@ -278,6 +304,7 @@ function clearLines() {
                 currentLevel = Math.floor(linesClearedCount / 10) + 1;
                 const levelElement = document.getElementById('level');
                 levelElement.textContent = currentLevel;
+                levelUp.play();
                 increaseGameSpeed();
             }
 
@@ -289,12 +316,14 @@ function clearLines() {
                     gameStarted = false;
                     endGame();
                 } else {
+                    pieceLandingLineClear.play();
                     drawNextBlock(); 
                     draw();
                 }
             }, 0);
         });
     } else {
+        pieceLanding.play();
         currentTetromino = nextTetromino;
         nextTetromino = getRandomTetromino();
         position = resetPosition();
@@ -358,8 +387,9 @@ function update() {
     }
     draw();
     if (isGameOver()) {
+        music.pause();
+        gameOverJingle.play();
         clearInterval(gameLoop); 
-        endGame(); 
     }
 }
 
@@ -380,6 +410,6 @@ function startGameLoop() {
 export function startGame() {
     document.getElementById('startButton').style.display = 'none';
     gameStarted = true;
-
+    music.play();
     startGameLoop();
 }
