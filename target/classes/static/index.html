@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tetris Game</title>
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+    <!-- Sound Effects -->
+    <audio id="4-line-clear" hidden>
+        <source src="./assets/sound/4 line clear.mp3" type="audio/mp3">
+    </audio>
+    <audio id="game-over-jingle" hidden>
+        <source src="./assets/sound/game over jingle.mp3" type="audio/mp3">
+    </audio>
+    <audio id="game-over" hidden>
+        <source src="./assets/sound/game over.mp3" type="audio/mp3">
+    </audio>
+    <audio id="level-up" hidden>
+        <source src="./assets/sound/level up.mp3" type="audio/mp3">
+    </audio>
+    <audio id="line-clear" hidden>
+        <source src="./assets/sound/line clear.mp3" type="audio/mp3">
+    </audio>
+    <audio id="move-piece" hidden>
+        <source src="./assets/sound/move piece.mp3" type="audio/mp3">
+    </audio>
+    <audio id="music" hidden loop>
+        <source src="./assets/sound/music.mp3" type="audio/mp3">
+    </audio>
+    <audio id="piece-landing-line-clear" hidden>
+        <source src="./assets/sound/piece landing line clear.mp3" type="audio/mp3">
+    </audio>
+    <audio id="piece-landing" hidden>
+        <source src="./assets/sound/piece landing.mp3" type="audio/mp3">
+    </audio>
+    <audio id="rotate-piece" hidden>
+        <source src="./assets/sound/rotate piece.mp3" type="audio/mp3">
+    </audio>
+
+    <div id="header">
+        <img src="./assets/images/tetris-logo.png" alt="Tetris Logo" id="tetris-logo">
+    </div>
+    <div id="tetris-layout">
+        <canvas id="tetris" width="300" height="600"></canvas>
+        <div id="sidebar">
+            <div id="score-container">
+                <div class="label">SCORE</div>
+                <div id="score">0</div>
+            </div>
+            <div id="level-lines-container">
+                <div class="info">
+                    <div class="label">LEVEL</div>
+                    <div id="level">1</div>
+                </div>
+                <div class="info">
+                    <div class="label">LINES</div>
+                    <div id="lines">0</div>
+                </div>
+            </div>
+            <div id="next-block-container">
+                <div class="label">NEXT</div>
+                <canvas id="nextBlock" width="120" height="120"></canvas>
+            </div>
+            <div id="controls-guide">
+                <span>Left/Right Arrows: Move</span>
+                <span>Up Arrow: Rotate</span>
+                <span>Down Arrow: Drop</span>
+            </div>
+            <button id="startButton">Start Game</button>
+        </div>
+    </div>
+
+    <script type="module">
+        import { startGame } from './js/tetris.js';
+      
+        document.addEventListener("DOMContentLoaded", function() {
+            console.log("Tetris loaded!");
+            const startButton = document.getElementById('startButton');
+            startButton.addEventListener('click', startGame);
+        });
+    </script>
+</body>
+</html>
